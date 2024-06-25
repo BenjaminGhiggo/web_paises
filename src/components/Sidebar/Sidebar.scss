@@ -1,0 +1,49 @@
+.sidebar {
+  width: 200px; /* Ajusta el ancho del sidebar */
+  background: #424242; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Alinea los elementos al centro */
+  padding: 1em 0; /* Espaciado interno */
+  position: fixed; /* Fija el sidebar en la parte izquierda */
+  left: 0;
+
+  .logo {
+    background: #636363; /* Fondo del logo */
+    padding: 1em;
+    margin-bottom: 2em;
+    width: 80%; /* Ajusta el ancho del logo */
+    text-align: center;
+    font-size: 1.2em;
+    border-radius: 8px; /* Bordes redondeados */
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+    a {
+      display: block;
+      padding: 1em;
+      width: 80%;
+      margin: 0.5em 0;
+      text-align: center;
+      color: #fff;
+      text-decoration: none;
+      background: #565656; /* Fondo de los links */
+      border-radius: 8px; /* Bordes redondeados */
+
+      &.active {
+        background: #007bff; /* Color de fondo del link activo */
+      }
+
+      &:hover {
+        background: #686868; /* Color de fondo al pasar el cursor */
+      }
+    }
+  }
+}

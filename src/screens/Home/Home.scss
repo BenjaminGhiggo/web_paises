@@ -1,0 +1,13 @@
+.home {
+    input {
+      width: 100%;
+      padding: 1em;
+      margin-bottom: 1em;
+    }
+    .country-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1em;
+    }
+  }
+  
