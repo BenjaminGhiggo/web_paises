@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import CountryCard from '../../components/CountryCard/CountryCard';
+import CountryDetailPanel from '../../components/CountryDetailPanel/CountryDetailPanel';
 import './MainContent.scss';
 
 const GET_COUNTRIES = gql`
@@ -11,6 +12,12 @@ const GET_COUNTRIES = gql`
       continent {
         name
       }
+      capital
+      languages {
+        name
+      }
+      currency
+      awsRegion
     }
   }
 `;
@@ -18,10 +25,20 @@ const GET_COUNTRIES = gql`
 const MainContent = () => {
   const { loading, error, data } = useQuery(GET_COUNTRIES);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   const handleSearch = (e) => {
     e.preventDefault();
     console.log('Buscando:', searchQuery);
+  };
+
+  const handleCountrySelect = (country) => {
+    console.log('País seleccionado:', country);
+    setSelectedCountry(country);
+  };
+
+  const handleClosePanel = () => {
+    setSelectedCountry(null);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -50,9 +67,12 @@ const MainContent = () => {
         {data.countries
           .filter(country => country.name.toLowerCase().includes(searchQuery.toLowerCase()))
           .map(country => (
-            <CountryCard key={country.code} country={country} />
+            <CountryCard key={country.code} country={country} onSelect={handleCountrySelect} />
           ))}
       </div>
+      {selectedCountry && (
+        <CountryDetailPanel country={selectedCountry} onClose={handleClosePanel} />
+      )}
     </div>
   );
 };

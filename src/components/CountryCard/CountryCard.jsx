@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import defaultImage from '../../assets/default-image.jpg';
 import { getCountryImage } from '../../utils/unsplash';
 import './CountryCard.scss';
 
-const CountryCard = ({ country }) => {
+const CountryCard = ({ country, onSelect }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [flagUrl, setFlagUrl] = useState('');
 
@@ -15,14 +14,10 @@ const CountryCard = ({ country }) => {
       setImageUrl(image || defaultImage);
     };
 
-    const fetchFlag = async () => {
-      try {
-        const response = await fetch(`https://restcountries.com/v3.1/alpha/${country.code}`);
-        const data = await response.json();
-        setFlagUrl(data[0].flags.png);
-      } catch (error) {
-        console.error('Error fetching flag from Rest Countries:', error);
-      }
+    // Usamos la API de Flagpedia para obtener la bandera
+    const fetchFlag = () => {
+      const flagUrl = `https://flagpedia.net/data/flags/h80/${country.code.toLowerCase()}.png`;
+      setFlagUrl(flagUrl);
     };
 
     fetchImage();
@@ -30,7 +25,7 @@ const CountryCard = ({ country }) => {
   }, [country.name, country.code]);
 
   return (
-    <Link to={`/country/${country.code}`} className="country-card">
+    <div className="country-card" onClick={() => onSelect(country)}>
       <img src={imageUrl} alt={`${country.name}`} />
       <div className="country-info">
         <img src={flagUrl} alt={`${country.name} flag`} className="flag" />
@@ -39,7 +34,7 @@ const CountryCard = ({ country }) => {
           <p>{country.continent.name}</p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
@@ -51,6 +46,7 @@ CountryCard.propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  onSelect: PropTypes.func.isRequired,
 };
 
 export default CountryCard;
