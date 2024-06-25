@@ -1,6 +1,53 @@
 .main-content {
   flex: 1;
-  margin-left: 200px; /* Ajusta el margen izquierdo para dejar espacio al sidebar */
   padding: 2em;
   background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .search-bar {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+
+    input {
+      width: 100%;
+      padding: 1em;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      outline: none;
+    }
+
+    button {
+      margin-left: 1em;
+      padding: 1em;
+      border-radius: 25px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .countries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+    width: 100%;
+    max-width: 1200px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr); /* Ajustar a 3 columnas en pantallas más grandes */
+    }
+  }
 }

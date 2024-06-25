@@ -1,15 +1,58 @@
+import { gql, useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import CountryCard from '../CountryCard/CountryCard';
 import './MainContent.scss';
 
-// Componente funcional para el contenido principal de la página
-const MainContent = ({ children }) => {
-  return <div className="main-content">{children}</div>;
+// Consulta GraphQL para obtener la lista de países
+const GET_COUNTRIES = gql`
+  query GetCountries {
+    countries {
+      code
+      name
+      continent {
+        name
+      }
+    }
+  }
+`;
+
+const MainContent = () => {
+  const { loading, error, data } = useQuery(GET_COUNTRIES);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log('Buscando:', searchQuery);
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return (
+    <div className="main-content">
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="País"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button onClick={handleSearch}>Buscar</button>
+      </div>
+      <div className="countries-grid">
+        {data.countries
+          .filter(country => country.name.toLowerCase().includes(searchQuery.toLowerCase()))
+          .map(country => (
+            <CountryCard key={country.code} country={country} />
+          ))}
+      </div>
+    </div>
+  );
 };
 
-// Definición de PropTypes para la validación de propiedades
 MainContent.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default MainContent;
