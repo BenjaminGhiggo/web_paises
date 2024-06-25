@@ -7,6 +7,7 @@ import './CountryCard.scss';
 
 const CountryCard = ({ country }) => {
   const [imageUrl, setImageUrl] = useState('');
+  const [flagUrl, setFlagUrl] = useState('');
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -14,14 +15,30 @@ const CountryCard = ({ country }) => {
       setImageUrl(image || defaultImage);
     };
 
+    const fetchFlag = async () => {
+      try {
+        const response = await fetch(`https://restcountries.com/v3.1/alpha/${country.code}`);
+        const data = await response.json();
+        setFlagUrl(data[0].flags.png);
+      } catch (error) {
+        console.error('Error fetching flag from Rest Countries:', error);
+      }
+    };
+
     fetchImage();
-  }, [country.name]);
+    fetchFlag();
+  }, [country.name, country.code]);
 
   return (
     <Link to={`/country/${country.code}`} className="country-card">
       <img src={imageUrl} alt={`${country.name}`} />
-      <h3>{country.name}</h3>
-      <p>{country.continent.name}</p>
+      <div className="country-info">
+        <img src={flagUrl} alt={`${country.name} flag`} className="flag" />
+        <div>
+          <h3>{country.name}</h3>
+          <p>{country.continent.name}</p>
+        </div>
+      </div>
     </Link>
   );
 };
