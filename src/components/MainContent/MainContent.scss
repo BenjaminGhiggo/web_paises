@@ -5,50 +5,80 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
 
   .search-bar {
     width: 100%;
     max-width: 800px;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 2em;
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5em 1em;
 
-    input {
-      width: 100%;
-      padding: 1em;
-      border-radius: 25px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-      outline: none;
+    .search-input {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+      padding-right: 1em;
+
+      input {
+        flex: 1;
+        padding: 0.5em;
+        border: none;
+        font-size: 1em;
+        outline: none;
+        background: #f9f9f9;
+        color: #333;
+        border-radius: 25px 0 0 25px;
+
+        &::placeholder {
+          color: #999;
+        }
+      }
+
+      label {
+        position: absolute;
+        top: 0;
+        left: 1em;
+        font-size: 1.2em;
+        color: #666;
+        pointer-events: none;
+        transform: translateY(-100%);
+      }
     }
 
     button {
-      margin-left: 1em;
-      padding: 1em;
+      padding: 1em 2em;
       border-radius: 25px;
       border: none;
       background-color: #007bff;
       color: #fff;
       font-size: 1em;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
       transition: background-color 0.3s;
 
       &:hover {
         background-color: #0056b3;
+      }
+
+      svg {
+        fill: currentColor;
       }
     }
   }
 
   .countries-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1em;
     width: 100%;
     max-width: 1200px;
-
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(3, 1fr); /* Ajustar a 3 columnas en pantallas más grandes */
-    }
   }
 }

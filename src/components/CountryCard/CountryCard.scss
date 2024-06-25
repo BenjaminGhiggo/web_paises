@@ -17,31 +17,29 @@
 
   img {
     width: 100%;
-    height: 150px; // Ajuste la altura aquí
-    object-fit: cover;
+    height: 150px; /* Altura fija para asegurar el tamaño uniforme */
     border-radius: 8px;
+    object-fit: cover; /* Ajusta la imagen para cubrir el área */
     margin-bottom: 0.5em;
   }
 
-  .country-info {
+  h3 {
+    margin: 0;
+    font-size: 1.2em;
     display: flex;
     align-items: center;
-    
-    .flag {
-      width: 32px;
-      height: auto;
-      margin-right: 0.5em;
-    }
+    gap: 0.5em;
+  }
 
-    h3 {
-      margin: 0;
-      font-size: 1.2em;
-    }
+  .flag {
+    width: 30px;
+    height: auto;
+    border-radius: 4px;
+  }
 
-    p {
-      margin: 0;
-      font-size: 1em;
-      color: #888;
-    }
+  p {
+    margin: 0;
+    font-size: 1em;
+    color: #888;
   }
 }
