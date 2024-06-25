@@ -1,9 +1,13 @@
 import React from 'react';
 import './Vista2.scss';
 
-// Componente funcional para la Vista 2
 const Vista2 = () => {
-  return <div className="vista2">Hola! Esta es la Vista 2</div>;
+  return (
+    <div className="vista">
+      <h1>Vista 2</h1>
+      <p>Contenido de la Vista 2</p>
+    </div>
+  );
 };
 
 export default Vista2;

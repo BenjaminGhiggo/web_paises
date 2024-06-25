@@ -4,7 +4,6 @@ import './App.css';
 import MainContent from './components/MainContent/MainContent';
 import Sidebar from './components/Sidebar/Sidebar';
 import ApolloProvider from './context/ApolloProvider';
-import Home from './screens/Home/Home';
 import Vista1 from './screens/Vista1/Vista1';
 import Vista2 from './screens/Vista2/Vista2';
 
@@ -15,13 +14,13 @@ const App = () => {
       <Router>
         <div className="app">
           <Sidebar />
-          <MainContent>
+          <div className="content">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<MainContent />} />
               <Route path="/vista1" element={<Vista1 />} />
               <Route path="/vista2" element={<Vista2 />} />
             </Routes>
-          </MainContent>
+          </div>
         </div>
       </Router>
     </ApolloProvider>

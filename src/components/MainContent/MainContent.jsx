@@ -1,10 +1,9 @@
 import { gql, useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import CountryCard from '../CountryCard/CountryCard';
+import CountryCard from '../../components/CountryCard/CountryCard';
 import './MainContent.scss';
 
-// Consulta GraphQL para obtener la lista de países
 const GET_COUNTRIES = gql`
   query GetCountries {
     countries {
@@ -52,7 +51,7 @@ const MainContent = () => {
 };
 
 MainContent.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default MainContent;

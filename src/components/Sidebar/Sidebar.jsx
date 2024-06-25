@@ -8,9 +8,9 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="logo">Logo</div>
       <nav>
-        <NavLink to="/" exact activeClassName="active">Home</NavLink>
-        <NavLink to="/vista1" activeClassName="active">Vista 1</NavLink>
-        <NavLink to="/vista2" activeClassName="active">Vista 2</NavLink>
+        <NavLink to="/" exact className={({ isActive }) => (isActive ? 'active' : '')}>Home</NavLink>
+        <NavLink to="/vista1" className={({ isActive }) => (isActive ? 'active' : '')}>Vista 1</NavLink>
+        <NavLink to="/vista2" className={({ isActive }) => (isActive ? 'active' : '')}>Vista 2</NavLink>
       </nav>
     </div>
   );
