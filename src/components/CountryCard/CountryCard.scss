@@ -17,7 +17,8 @@
 
   img {
     width: 100%;
-    height: auto;
+    height: 150px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Ajustar la imagen dentro del contenedor */
     border-radius: 8px;
     margin-bottom: 0.5em;
   }
