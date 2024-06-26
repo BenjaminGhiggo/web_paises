@@ -1,0 +1,59 @@
+.continent-filter-panel {
+    background: #fff;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    right: 52%;
+    top: 20%; /* Ajuste para estar debajo de la barra de búsqueda */
+    width: 350px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+  
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1em;
+  
+      h2 {
+        margin: 0;
+        color: #333;
+      }
+  
+      button {
+        background: none;
+        border: none;
+        color: #007bff;
+        font-size: 1em;
+        cursor: pointer;
+      }
+    }
+  
+    .continents {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1em;
+  
+      .continent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+  
+        img {
+          width: 100px;
+          height: auto;
+          border-radius: 8px;
+          margin-bottom: 0.5em;
+        }
+  
+        p {
+          margin: 0;
+          color: #333;
+        }
+      }
+    }
+  }
+  

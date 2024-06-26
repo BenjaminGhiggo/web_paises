@@ -1,5 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { useState } from 'react';
+import ContinentFilterPanel from '../../components/ContinentFilterPanel/ContinentFilterPanel';
 import CountryCard from '../../components/CountryCard/CountryCard';
 import CountryDetailPanel from '../../components/CountryDetailPanel/CountryDetailPanel';
 import './MainContent.scss';
@@ -26,6 +27,7 @@ const MainContent = () => {
   const { loading, error, data } = useQuery(GET_COUNTRIES);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [showContinentFilter, setShowContinentFilter] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -41,6 +43,20 @@ const MainContent = () => {
     setSelectedCountry(null);
   };
 
+  const handleFocus = () => {
+    setShowContinentFilter(true);
+  };
+
+  const handleContinentSelect = (continent) => {
+    setSearchQuery(continent);
+    setShowContinentFilter(false);
+  };
+
+  const handleClearFilter = () => {
+    setSearchQuery('');
+    setShowContinentFilter(false);
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
@@ -53,6 +69,7 @@ const MainContent = () => {
             placeholder="Escribe el país que deseas ver"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={handleFocus}
           />
           <label>País</label>
         </div>
@@ -63,6 +80,12 @@ const MainContent = () => {
           Buscar
         </button>
       </div>
+      {showContinentFilter && (
+        <ContinentFilterPanel
+          onSelectContinent={handleContinentSelect}
+          onClear={handleClearFilter}
+        />
+      )}
       <div className="countries-grid">
         {data.countries
           .filter(country => country.name.toLowerCase().includes(searchQuery.toLowerCase()))
