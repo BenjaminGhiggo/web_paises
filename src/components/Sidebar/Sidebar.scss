@@ -1,23 +1,40 @@
 .sidebar {
-  width: 200px; /* Ajusta el ancho del sidebar */
-  background: #424242; /* Color de fondo */
-  color: #fff; /* Color del texto */
-  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 15%;
+  height: 93vh; /* Ajustar la altura para ocupar el 93% */
+  background: #424242;
+  color: #fff;
+  
   display: flex;
   flex-direction: column;
-  align-items: center; /* Alinea los elementos al centro */
-  padding: 1em 0; /* Espaciado interno */
-  position: fixed; /* Fija el sidebar en la parte izquierda */
+  align-items: center;
+  padding: 1em 0;
+  position: fixed;
   left: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  &.closed {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
 
   .logo {
-    background: #636363; /* Fondo del logo */
+    background: #636363;
     padding: 1em;
     margin-bottom: 2em;
-    width: 80%; /* Ajusta el ancho del logo */
+    width: 80%;
     text-align: center;
     font-size: 1.2em;
-    border-radius: 8px; /* Bordes redondeados */
+    border-radius: 8px;
+  }
+
+  .menu-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-bottom: 2em;
+    position: absolute;
+    top: 1em;
+    left: 1em;
   }
 
   nav {
@@ -34,16 +51,56 @@
       text-align: center;
       color: #fff;
       text-decoration: none;
-      background: #565656; /* Fondo de los links */
-      border-radius: 8px; /* Bordes redondeados */
+      background: #565656;
+      border-radius: 8px;
 
       &.active {
-        background: #007bff; /* Color de fondo del link activo */
+        background: #007bff;
       }
 
       &:hover {
-        background: #686868; /* Color de fondo al pasar el cursor */
+        background: #686868;
       }
     }
   }
+
+  @media (max-width: 768px) {
+    width: 150px;
+
+    .logo {
+      width: 70%;
+      font-size: 1em;
+    }
+
+    nav a {
+      width: 70%;
+      padding: 0.5em;
+      font-size: 0.9em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+
+    .logo {
+      width: 60%;
+      font-size: 0.8em;
+    }
+
+    nav a {
+      width: 60%;
+      padding: 0.4em;
+      font-size: 0.8em;
+    }
+  }
+}
+
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 11;
 }

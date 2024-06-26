@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
+import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import ContinentFilterPanel from '../../components/ContinentFilterPanel/ContinentFilterPanel';
 import CountryCard from '../../components/CountryCard/CountryCard';
@@ -31,7 +32,7 @@ const continentMapping = {
   "África": "Africa"
 };
 
-const MainContent = () => {
+const MainContent = ({ sidebarOpen }) => {
   const { loading, error, data } = useQuery(GET_COUNTRIES);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -98,7 +99,7 @@ const MainContent = () => {
   });
 
   return (
-    <div className="main-content">
+    <div className={`main-content ${sidebarOpen ? 'shifted' : ''}`}>
       <div className="search-bar">
         <div className="search-input">
           <input
@@ -135,6 +136,10 @@ const MainContent = () => {
       )}
     </div>
   );
+};
+
+MainContent.propTypes = {
+  sidebarOpen: PropTypes.bool.isRequired,
 };
 
 export default MainContent;

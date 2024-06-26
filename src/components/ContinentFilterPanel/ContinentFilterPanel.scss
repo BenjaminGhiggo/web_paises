@@ -3,8 +3,8 @@
     padding: 1em;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: absolute; /* Cambiar a absolute para posicionar debajo de la barra de búsqueda */
-    top: calc(100% + 1em); /* Posicionar justo debajo de la barra de búsqueda con un margen */
+    position: absolute; 
+    top: calc(100% + 1em); 
     left: 0;
     width: 100%;
     z-index: 10;
@@ -59,6 +59,18 @@
           border: 2px solid #007bff;
           border-radius: 8px;
         }
+      }
+    }
+  
+    @media (max-width: 768px) {
+      .continents {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .continents {
+        grid-template-columns: 1fr;
       }
     }
   }

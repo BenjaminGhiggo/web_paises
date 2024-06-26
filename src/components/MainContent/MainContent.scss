@@ -1,10 +1,16 @@
 .main-content {
   flex: 1;
   padding: 2em;
+  width: 100%;
   background: #e3f4fe;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: margin-left 0.3s ease-in-out;
+
+  &.expanded {
+    margin-left: 0;
+  }
 
   .search-bar {
     width: 100%;
@@ -17,7 +23,7 @@
     border-radius: 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 0.5em 1em;
-    position: relative; /* Para posicionar el panel de filtro */
+    position: relative;
 
     .search-input {
       display: flex;
@@ -35,6 +41,7 @@
         background: #f9f9f9;
         color: #333;
         border-radius: 25px 0 0 25px;
+        
 
         &::placeholder {
           color: #999;
@@ -81,5 +88,35 @@
     gap: 1em;
     width: 100%;
     max-width: 1200px;
+  }
+
+  @media (max-width: 1024px) {
+    .countries-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .countries-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-bar {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .search-input {
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 1em;
+      }
+
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   }
 }
