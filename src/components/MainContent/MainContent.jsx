@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ContinentFilterPanel from '../../components/ContinentFilterPanel/ContinentFilterPanel';
 import CountryCard from '../../components/CountryCard/CountryCard';
 import CountryDetailPanel from '../../components/CountryDetailPanel/CountryDetailPanel';
@@ -23,11 +23,21 @@ const GET_COUNTRIES = gql`
   }
 `;
 
+const continentMapping = {
+  "Europa": "Europe",
+  "América": ["South America", "North America"],
+  "Asia": "Asia",
+  "Oceanía": "Oceania",
+  "África": "Africa"
+};
+
 const MainContent = () => {
   const { loading, error, data } = useQuery(GET_COUNTRIES);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [showContinentFilter, setShowContinentFilter] = useState(false);
+  const [selectedContinents, setSelectedContinents] = useState([]);
+  const continentFilterRef = useRef(null);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -48,17 +58,44 @@ const MainContent = () => {
   };
 
   const handleContinentSelect = (continent) => {
-    setSearchQuery(continent);
-    setShowContinentFilter(false);
+    setSelectedContinents((prev) => {
+      if (prev.includes(continent)) {
+        return prev.filter((c) => c !== continent);
+      } else {
+        return [...prev, continent];
+      }
+    });
   };
 
   const handleClearFilter = () => {
-    setSearchQuery('');
-    setShowContinentFilter(false);
+    setSelectedContinents([]);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (continentFilterRef.current && !continentFilterRef.current.contains(event.target)) {
+        setShowContinentFilter(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [continentFilterRef]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
+
+  const filteredCountries = data.countries.filter(country => {
+    if (selectedContinents.length === 0) {
+      return country.name.toLowerCase().includes(searchQuery.toLowerCase());
+    } else {
+      const continentNames = selectedContinents.flatMap(continent => continentMapping[continent]);
+      return continentNames.includes(country.continent.name) &&
+        country.name.toLowerCase().includes(searchQuery.toLowerCase());
+    }
+  });
 
   return (
     <div className="main-content">
@@ -82,16 +119,16 @@ const MainContent = () => {
       </div>
       {showContinentFilter && (
         <ContinentFilterPanel
+          ref={continentFilterRef}
+          selectedContinents={selectedContinents}
           onSelectContinent={handleContinentSelect}
           onClear={handleClearFilter}
         />
       )}
       <div className="countries-grid">
-        {data.countries
-          .filter(country => country.name.toLowerCase().includes(searchQuery.toLowerCase()))
-          .map(country => (
-            <CountryCard key={country.code} country={country} onSelect={handleCountrySelect} />
-          ))}
+        {filteredCountries.map(country => (
+          <CountryCard key={country.code} country={country} onSelect={handleCountrySelect} />
+        ))}
       </div>
       {selectedCountry && (
         <CountryDetailPanel country={selectedCountry} onClose={handleClosePanel} />

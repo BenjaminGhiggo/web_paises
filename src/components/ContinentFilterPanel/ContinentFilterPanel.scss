@@ -3,10 +3,10 @@
     padding: 1em;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    right: 52%;
-    top: 20%; /* Ajuste para estar debajo de la barra de búsqueda */
-    width: 350px;
+    position: absolute; /* Cambiar a absolute para posicionar debajo de la barra de búsqueda */
+    top: calc(100% + 1em); /* Posicionar justo debajo de la barra de búsqueda con un margen */
+    left: 0;
+    width: 100%;
     z-index: 10;
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@
   
     .continents {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1em;
   
       .continent {
@@ -41,6 +41,7 @@
         flex-direction: column;
         align-items: center;
         cursor: pointer;
+        text-align: center;
   
         img {
           width: 100px;
@@ -52,6 +53,11 @@
         p {
           margin: 0;
           color: #333;
+        }
+  
+        &.selected {
+          border: 2px solid #007bff;
+          border-radius: 8px;
         }
       }
     }
