@@ -99,7 +99,7 @@ const MainContent = ({ sidebarOpen }) => {
   });
 
   return (
-    <div className={`main-content-container ${sidebarOpen ? 'shifted' : ''}`}>
+    <div className={`main-content-container ${sidebarOpen ? 'shifted' : 'full-width'}`}>
       <div className="main-content">
         <div className="search-bar">
           <div className="search-input">

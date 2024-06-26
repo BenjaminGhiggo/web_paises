@@ -22,7 +22,7 @@ const Sidebar = () => {
         </nav>
       </div>
       {!isOpen && (
-        <img src={menuIcon} alt="Menu Icon" className="menu-icon" onClick={toggleSidebar} />
+        <img src={menuIcon} alt="Menu Icon" className="menu-icon-fixed" onClick={toggleSidebar} />
       )}
     </>
   );

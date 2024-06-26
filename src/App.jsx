@@ -20,7 +20,7 @@ const App = () => {
       <Router>
         <div className="app">
           <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-          <div className={`content ${sidebarOpen ? 'shifted' : ''}`}>
+          <div className={`content ${sidebarOpen ? 'shifted' : 'full-width'}`}>
             <Routes>
               <Route path="/" element={<MainContent sidebarOpen={sidebarOpen} />} />
               <Route path="/vista1" element={<Vista1 />} />

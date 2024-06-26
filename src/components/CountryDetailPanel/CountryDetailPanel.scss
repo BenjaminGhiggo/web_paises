@@ -74,4 +74,22 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    width: calc(100% - 2em); /* Ajustar el ancho para pantallas más pequeñas */
+    height: auto; /* Permitir que la altura sea automática */
+    right: 1em; /* Mantener el margen derecho */
+    top: 1em; /* Mantener el margen superior */
+    border-radius: 8px; /* Mantener los bordes redondeados */
+
+    
+  }
+
+  @media (max-width: 480px) {
+    width: calc(100% - 2em); /* Ajustar el ancho para pantallas más pequeñas */
+    height: auto; /* Permitir que la altura sea automática */
+    right: 1em; /* Mantener el margen derecho */
+    top: 1em; /* Mantener el margen superior */
+    border-radius: 8px; /* Mantener los bordes redondeados */
+  }
 }
