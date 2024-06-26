@@ -14,7 +14,6 @@ const CountryCard = ({ country, onSelect }) => {
       setImageUrl(image || defaultImage);
     };
 
-    // Usamos la API de Flagpedia para obtener la bandera
     const fetchFlag = () => {
       const flagUrl = `https://flagpedia.net/data/flags/h80/${country.code.toLowerCase()}.png`;
       setFlagUrl(flagUrl);
@@ -26,10 +25,10 @@ const CountryCard = ({ country, onSelect }) => {
 
   return (
     <div className="country-card" onClick={() => onSelect(country)}>
-      <img src={imageUrl} alt={`${country.name}`} />
+      <img src={imageUrl} alt={`${country.name}`} className="country-image"/>
       <div className="country-info">
         <img src={flagUrl} alt={`${country.name} flag`} className="flag" />
-        <div>
+        <div className="country-text">
           <h3>{country.name}</h3>
           <p>{country.continent.name}</p>
         </div>

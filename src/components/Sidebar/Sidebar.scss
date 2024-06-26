@@ -3,14 +3,16 @@
   height: 93vh; /* Ajustar la altura para ocupar el 93% */
   background: #424242;
   color: #fff;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1em 0;
   position: fixed;
   left: 0;
+  top: 0;
+  bottom: 0;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 10;
 
   &.closed {
     transform: translateX(-100%);
@@ -28,13 +30,11 @@
   }
 
   .menu-icon {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    left: 50%;
     cursor: pointer;
-    margin-bottom: 2em;
-    position: absolute;
-    top: 1em;
-    left: 1em;
+    margin-bottom: 4px; /* Espacio entre el icono y el botón 'Home' */
   }
 
   nav {
@@ -96,11 +96,12 @@
 }
 
 .menu-icon {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
-  position: fixed;
-  top: 1em;
-  left: 1em;
+  position: absolute;
+  top: calc(50% - 150px); /* Posición vertical ajustada para estar justo encima del botón 'Home' */
+  left: 1%;
+  transform: translateX(-50%);
   z-index: 11;
 }
