@@ -88,15 +88,18 @@ const MainContent = ({ sidebarOpen }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  const filteredCountries = data.countries.filter(country => {
-    if (selectedContinents.length === 0) {
-      return country.name.toLowerCase().includes(searchQuery.toLowerCase());
-    } else {
-      const continentNames = selectedContinents.flatMap(continent => continentMapping[continent]);
-      return continentNames.includes(country.continent.name) &&
-        country.name.toLowerCase().includes(searchQuery.toLowerCase());
-    }
-  });
+  // Filtrar y limitar a los primeros 9 países
+  const filteredCountries = data.countries
+    .filter(country => {
+      if (selectedContinents.length === 0) {
+        return country.name.toLowerCase().includes(searchQuery.toLowerCase());
+      } else {
+        const continentNames = selectedContinents.flatMap(continent => continentMapping[continent]);
+        return continentNames.includes(country.continent.name) &&
+          country.name.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+    })
+    .slice(0, 9); // Limitar a los primeros 9 países
 
   return (
     <div className={`main-content-container ${sidebarOpen ? 'shifted' : 'full-width'}`}>
